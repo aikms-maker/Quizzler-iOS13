@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     var quizBrain = QuizBrain()
+    var choicesBrain = ChoicesBrain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +48,11 @@ class ViewController: UIViewController {
     @objc func updateUI() {
         questionLabel.text = quizBrain.getQuestionText()
         
-        let choices = quizBrain.getChoices()
-        choice1.setTitle(choices[0], for: .normal)
-        choice2.setTitle(choices[1], for: .normal)
-        choice3.setTitle(choices[2], for: .normal)
+        let choicesNumber = quizBrain.getChoicesNumber()
+        let choices = choicesBrain.getChoices(choiceAnswersNumber: choicesNumber)
+        choice1.setTitle(choices.answer_1, for: .normal)
+        choice2.setTitle(choices.answer_2, for: .normal)
+        choice3.setTitle(choices.answer_3, for: .normal)
         
         choice1.backgroundColor = UIColor.clear
         choice2.backgroundColor = UIColor.clear
